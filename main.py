@@ -5,7 +5,7 @@ import logging
 import telegram
 from telegram.ext import Updater, MessageHandler, Filters, CallbackQueryHandler
 from telegram.ext import CallbackContext, CommandHandler
-from telegram import ParseMode, ReplyKeyboardMarkup, Update, InlineKeyboardButton, InlineKeyboardMarkup, ForceReply, ParseMode
+from telegram import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 
 from game import Game
 import settings
@@ -168,7 +168,8 @@ def command_change_word(update, context):
 
     logger.info('Got command /change_word,'
                 'chat_id={},'
-                'user="{}"({}),'
+                'user="{}"({
+    'user="{}"({}),'
                 'is_user_ogretmen={},'
                 'word={}'.format(chat_id,
                                  update.message.from_user.full_name,
