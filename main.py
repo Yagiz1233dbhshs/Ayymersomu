@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import logging
-
 import telegram
-from telegram.ext import Updater, MessageHandler, Filters, CallbackQueryHandler, CommandHandler
+from telegram.ext import Updater, MessageHandler, CommandHandler, CallbackQueryHandler, filters  # Küçük harfli "filters" kullanımı
 from telegram import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 
 from game import Game
