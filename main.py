@@ -169,7 +169,13 @@ def command_change_word(update, context):
                 'chat_id={},'
                 'user="{}"({}),'
                 'is_user_ogretmen={},'
-    word))
+                'word={}'.format(chat_id,
+                                 update.message.from_user.full_name,
+                                 update.message.from_user.id,
+                                 game.is_ogretmen(user_id),
+                                 word))
+
+    update.message.reply_text(word, reply_to_message_id=True)
 
     update.message.reply_text(word, reply_to_message_id=True)
 
