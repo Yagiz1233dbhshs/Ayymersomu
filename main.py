@@ -3,8 +3,7 @@
 import logging
 
 import telegram
-from telegram.ext import Updater, MessageHandler, Filters, CallbackQueryHandler
-from telegram.ext import CallbackContext, CommandHandler
+from telegram.ext import Updater, MessageHandler, Filters, CallbackQueryHandler, CommandHandler
 from telegram import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 
 from game import Game
@@ -65,7 +64,7 @@ def button(update, context):
             bot.answer_callback_query(callback_query_id=query.id, text=word, show_alert=True)
 
 
-def command_start(update, context: CallbackContext):
+def command_start(update, context):
     if update.effective_chat.type == "private":
         
         addme = InlineKeyboardButton(text="✅ Botu Grupa Ekle", url="https://t.me/botnamebot?startgroup=a")
@@ -81,7 +80,7 @@ def command_start(update, context: CallbackContext):
 
         logger.info('Got command /oyun,'
                     'chat_id={},'
-                    'user_id'.format(chat_id,
+                    'user_id={}'.format(chat_id,
                                      user_id))
 
         game = get_or_create_game(chat_id)
@@ -98,7 +97,7 @@ def set_ogretmen(update, context):
     username = update.message.from_user.full_name
     logger.info('chat_id={}, New master is "{}"({})'.format(chat_id,
                                                             username,
-                                                            update.message.from_user.id))
+                                                            user_id))
 
     game = get_or_create_game(chat_id)
 
@@ -113,7 +112,7 @@ def set_ogretmen(update, context):
     update.message.reply_text('[{}](tg://user?id={}) _Şimdi sizlere bir soru gösterecek, grup kullanıcıları dikkatli olun ve hızlı hesaplayın_ 🎭🎲'.format(username,user_id), reply_to_message_id=True, reply_markup=reply_markup, parse_mode=ParseMode.MARKDOWN)
 
 
-def command_ogretmen(update: Update, context):
+def command_ogretmen(update, context):
     chat_id = update.message.chat.id
     game = get_or_create_game(chat_id)
     username = update.message.from_user.full_name
@@ -168,14 +167,9 @@ def command_change_word(update, context):
 
     logger.info('Got command /change_word,'
                 'chat_id={},'
-                'user="{}"({
-    'user="{}"({}),'
+                'user="{}"({}),'
                 'is_user_ogretmen={},'
-                'word={}'.format(chat_id,
-                                 update.message.from_user.full_name,
-                                 user_id,
-                                 game.is_ogretmen(user_id),
-                                 word))
+    word))
 
     update.message.reply_text(word, reply_to_message_id=True)
 
